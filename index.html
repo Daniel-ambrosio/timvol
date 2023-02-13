@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+        
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+        width: 200px;
+        text-align: center;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      #team1, #team2 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .teams {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  body {
+    background-image: url('https://uploaddeimagens.com.br/images/004/352/046/original/voleizin.jpg?1676297053');
+    background-repeat: repeat;
+  }
+    </style>
+     <h2 style="text-align: center; color: white; text-shadow: 1px 1px black;">VOLIZINHO DA DESCULPA</h2>
+      <div style="text-align:center;">
+        <button id="submitButton" style="margin:auto;">Dividir em times</button>
+      </div>    
+  </head>
+  <body>
+    <div class="container">
+        <h2 style="text-shadow: 1px 1px #000; border-radius: 5px; padding: 10px; background-color: #fff;">Entre com os nomes dos jogadores</h2>
+        <form id="form">
+        </form>
+        <button id="addPlayerBtn">Adicionar Jogador</button>
+      </div>
+
+<script>
+  const form = document.querySelector("#form");
+  const addPlayerBtn = document.querySelector("#addPlayerBtn");
+  let playerCount = 1;
+
+  addPlayerBtn.addEventListener("click", function() {
+    const input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("id", `input${++playerCount}`);
+    input.setAttribute("required", "");
+    form.appendChild(input);
+  });
+</script>
+
+<header>
+  
+  </header>
+  
+
+    <script>
+        const submitButton = document.querySelector("#submitButton");
+        submitButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          const inputs = document.querySelectorAll("input[type='text']");
+          const players = [];
+          inputs.forEach((input) => {
+            players.push(input.value);
+          });
+          const team1 = [];
+          const team2 = [];
+          while (players.length > 0) {
+            const randomIndex = Math.floor(Math.random() * players.length);
+            const player = players.splice(randomIndex, 1)[0];
+            if (team1.length < team2.length) {
+              team1.push(player);
+            } else {
+              team2.push(player);
+            }
+          }
+          const team1Div = document.querySelector("#team1");
+          const team2Div = document.querySelector("#team2");
+          team1Div.innerHTML = `Time 1: ${team1.join(", ")}`;
+          team2Div.innerHTML = `Time 2: ${team2.join(", ")}`;
+        });
+  </script>
+  
+  <div id="team1"></div>
+  <div id="team2"></div>
+  
+  </body>
+</html>
